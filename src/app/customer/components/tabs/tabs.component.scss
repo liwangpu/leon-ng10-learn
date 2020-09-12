@@ -1,0 +1,10 @@
+:host {
+    display: block;
+    height: 150px;
+    border: 1px solid orange;
+    padding: 1em;
+
+    &>* {
+        margin-bottom: .8em;
+    }
+}

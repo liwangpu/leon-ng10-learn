@@ -23,7 +23,8 @@ export class LoggerComponent implements OnInit, OnDestroy {
             logAfterContentInit: [],
             logAfterContentChecked: [],
             logAfterViewInit: [],
-            logAfterViewChecked: []
+            logAfterViewChecked: [],
+            logOnDestroy: []
         });
     }
 
@@ -40,7 +41,8 @@ export class LoggerComponent implements OnInit, OnDestroy {
             logAfterContentInit: getToggleValue('logAfterContentInit'),
             logAfterContentChecked: getToggleValue('logAfterContentChecked'),
             logAfterViewInit: getToggleValue('logAfterViewInit'),
-            logAfterViewChecked: getToggleValue('logAfterViewChecked')
+            logAfterViewChecked: getToggleValue('logAfterViewChecked'),
+            logOnDestroy: getToggleValue('logOnDestroy')
         };
         this.form.patchValue(initialValue);
 

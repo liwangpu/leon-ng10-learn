@@ -1,5 +1,6 @@
 <p class="title">日志设置面板</p>
 <form [formGroup]='form'>
+    <mat-checkbox formControlName='logTitle'>title</mat-checkbox>
     <mat-checkbox formControlName='logOnChanges'>onChanges</mat-checkbox>
     <mat-checkbox formControlName='logOnInit'>onInit</mat-checkbox>
     <mat-checkbox formControlName='logDoCheck'>doCheck</mat-checkbox>
@@ -7,5 +8,5 @@
     <mat-checkbox formControlName='logAfterContentChecked'>afterContentChecked</mat-checkbox>
     <mat-checkbox formControlName='logAfterViewInit'>afterViewInit</mat-checkbox>
     <mat-checkbox formControlName='logAfterViewChecked'>afterViewChecked</mat-checkbox>
-    <mat-checkbox formControlName='logTitle'>title</mat-checkbox>
+    <mat-checkbox formControlName='logOnDestroy'>onDestroy</mat-checkbox>
 </form>

@@ -18,6 +18,7 @@ export class HomeComponent extends Logger {
     public key: string = 'home';
     public constructor() {
         super();
+        console.log(`${this.key} ctor`);
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -47,6 +48,10 @@ export class HomeComponent extends Logger {
 
     public ngAfterViewChecked(): void {
         super.ngAfterViewChecked();
+    }
+
+    public ngOnDestroy(): void {
+        super.ngOnDestroy();
     }
 
     public test(): void {

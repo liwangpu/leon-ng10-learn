@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Directive, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Directive, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 export function getToggleValue(toggle: string): boolean {
     let str = localStorage.getItem(toggle);
@@ -10,7 +10,7 @@ export function setToggleValue(toggle: string, value: boolean): void {
 }
 
 @Directive()
-export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
+export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
     public abstract key: string;
     public logTitle: boolean;
@@ -21,6 +21,7 @@ export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContent
     public logAfterContentChecked: boolean;
     public logAfterViewInit: boolean;
     public logAfterViewChecked: boolean;
+    public logOnDestroy: boolean;
     public constructor() {
         this.logTitle = getToggleValue('logTitle');
         this.logOnChanges = getToggleValue('logOnChanges');
@@ -30,6 +31,7 @@ export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContent
         this.logAfterContentChecked = getToggleValue('logAfterContentChecked');
         this.logAfterViewInit = getToggleValue('logAfterViewInit');
         this.logAfterViewChecked = getToggleValue('logAfterViewChecked');
+        this.logOnDestroy = getToggleValue('logOnDestroy');
     }
 
     public get title(): string {
@@ -65,6 +67,10 @@ export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContent
 
     public ngAfterViewChecked(): void {
         if (this.logAfterViewChecked) { console.log(`${this.key} afterViewInitCheck`); }
+    }
+
+    public ngOnDestroy(): void {
+        if (this.logOnDestroy) { console.log(`${this.key} destroy`); }
     }
 
 }

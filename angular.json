@@ -107,6 +107,75 @@
                     }
                 }
             }
+        },
+        "mirror-gantt": {
+            "projectType": "library",
+            "root": "projects/mirror-gantt",
+            "sourceRoot": "projects/mirror-gantt/src",
+            "prefix": "mirror",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "inlineTemplate": false,
+                    "inlineStyle": false,
+                    "style": "scss",
+                    "skipTests": true
+                },
+                "@schematics/angular:class": {
+                    "skipTests": true
+                },
+                "@schematics/angular:directive": {
+                    "skipTests": true
+                },
+                "@schematics/angular:guard": {
+                    "skipTests": true
+                },
+                "@schematics/angular:interceptor": {
+                    "skipTests": true
+                },
+                "@schematics/angular:module": {
+                    "skipTests": true
+                },
+                "@schematics/angular:pipe": {
+                    "skipTests": true
+                },
+                "@schematics/angular:service": {
+                    "skipTests": true
+                }
+            },
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
+                    "options": {
+                        "tsConfig": "projects/mirror-gantt/tsconfig.lib.json",
+                        "project": "projects/mirror-gantt/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/mirror-gantt/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/mirror-gantt/src/test.ts",
+                        "tsConfig": "projects/mirror-gantt/tsconfig.spec.json",
+                        "karmaConfig": "projects/mirror-gantt/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/mirror-gantt/tsconfig.lib.json",
+                            "projects/mirror-gantt/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
+            }
         }
     },
     "defaultProject": "tutorial",

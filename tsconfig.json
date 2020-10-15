@@ -18,6 +18,9 @@
         "paths": {
             "@cxist/mirror-gantt": [
                 "projects/mirror-gantt/src/public-api.ts"
+            ],
+            "dhx-gantt/*": [
+                "projects/mirror-gantt/src/resources/gantt/*"
             ]
         }
     }

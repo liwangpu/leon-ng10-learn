@@ -6,6 +6,9 @@ import { GanttComponent } from './components/gantt/gantt.component';
     declarations: [GanttComponent],
     imports: [
         CommonModule
+    ],
+    exports: [
+        GanttComponent
     ]
 })
 export class MirrorGanttModule { }

@@ -19,47 +19,47 @@ export class GanttComponent implements OnInit {
                     id: 1,
                     text: "Project #2",
                     // start_date: "2018-04-01",
-                    myTest: 'aaaa',
                     // duration: 2,
                     progress: 0.4,
+                    render: "split",
                     open: true
                 },
                 {
                     id: 2,
                     text: "Task #1",
                     start_date: "2018-04-02",
-                    myTest: 'bbbb',
                     duration: 1,
                     progress: 0.6,
                     parent: 1,
                     open: true,
                     readonly: false,
+                    render: "split",
                     // editable: true
                 },
                 {
                     id: 3,
                     text: "Task #2",
                     start_date: "2018-04-03",
-                    myTest: 'cccc',
                     duration: 3,
                     // type: 'milestone',
                     progress: 0.6,
+                    render: "split",
                     parent: 1
                 },
                 {
                     id: 4,
                     text: "Task #3",
                     start_date: "2018-04-05",
-                    myTest: 'cccc',
                     duration: 5,
                     progress: 0.6,
+                    render: "split",
                     parent: 1
                 }
             ],
-            links: [
-                { id: 1, source: 2, target: 3, type: "0" },
-                { id: 2, source: 3, target: 4, type: "0" }
-            ]
+            // links: [
+            //     { id: 1, source: 2, target: 3, type: "0" },
+            //     { id: 2, source: 3, target: 4, type: "0" }
+            // ]
         };
 
         function myFun(task) {
@@ -97,12 +97,14 @@ export class GanttComponent implements OnInit {
             { name: "duration", label: "Duration", align: "center" },
             // { name: "myTest", label: "测试", template: myFun }
         ];
+        gantt.config.open_split_tasks = true;
+        // gantt.locale.labels.section_priority = "Priority";
+        // gantt.config.auto_types = true;
+
         gantt.init(this.gantContainer.nativeElement);
 
 
         gantt.parse(tasks);
-
-        // console.log("";
 
         let start_date_str = () => {
             var currentDate = new Date();
@@ -112,7 +114,7 @@ export class GanttComponent implements OnInit {
         }
 
         console.log(start_date_str());
-        
+
 
     }
 

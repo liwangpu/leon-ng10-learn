@@ -13,8 +13,8 @@
             "es2018"
         ],
         "paths": {
-            "dhx-gantt": [
-                "src/resources/gantt/dhtmlxgantt.d.ts"
+            "dhx-gantt/*": [
+                "projects/mirror-gantt/src/resources/gantt/*"
             ]
         }
     },

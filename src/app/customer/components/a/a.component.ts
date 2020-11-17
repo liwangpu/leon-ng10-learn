@@ -2,20 +2,20 @@ import { ChangeDetectionStrategy, Component, forwardRef, SimpleChanges } from '@
 import { Logger } from '../../models/logger';
 
 @Component({
-    selector: 'app-card',
-    templateUrl: './card.component.html',
-    styleUrls: ['./card.component.scss'],
+    selector: 'app-a',
+    templateUrl: './a.component.html',
+    styleUrls: ['./a.component.scss'],
     providers: [
         {
             provide: Logger,
-            useExisting: forwardRef(() => CardComponent)
+            useExisting: forwardRef(() => AComponent)
         }
     ],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent extends Logger {
+export class AComponent extends Logger {
 
-    public key: string = 'card';
+    public key: string = 'A';
     public constructor() {
         super();
         console.log(`${this.key} ctor`);
@@ -57,5 +57,4 @@ export class CardComponent extends Logger {
     public test(): void {
 
     }
-
 }

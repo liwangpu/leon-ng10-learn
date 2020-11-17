@@ -2,20 +2,20 @@ import { ChangeDetectionStrategy, Component, forwardRef, SimpleChanges } from '@
 import { Logger } from '../../models/logger';
 
 @Component({
-    selector: 'app-grid',
-    templateUrl: './grid.component.html',
-    styleUrls: ['./grid.component.scss'],
+    selector: 'app-top',
+    templateUrl: './top.component.html',
+    styleUrls: ['./top.component.scss'],
     providers: [
         {
             provide: Logger,
-            useExisting: forwardRef(() => GridComponent)
+            useExisting: forwardRef(() => TopComponent)
         }
     ],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridComponent extends Logger {
+export class TopComponent extends Logger {
 
-    public key: string = 'grid';
+    public key: string = 'Top';
     public constructor() {
         super();
         console.log(`${this.key} ctor`);
@@ -57,5 +57,4 @@ export class GridComponent extends Logger {
     public test(): void {
 
     }
-
 }

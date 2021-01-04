@@ -1,23 +1,25 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Injector, SimpleChanges } from '@angular/core';
 import { Logger } from '../../models/logger';
 
 @Component({
-    selector: 'app-b',
-    templateUrl: './b.component.html',
-    styleUrls: ['./b.component.scss'],
+    selector: 'app-a2',
+    templateUrl: './a2.component.html',
+    styleUrls: ['./a2.component.scss'],
     providers: [
         {
             provide: Logger,
-            useExisting: forwardRef(() => BComponent)
+            useExisting: forwardRef(() => A2Component)
         }
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BComponent extends Logger {
+export class A2Component extends Logger {
 
-    public key: string = 'B';
-    public constructor() {
-        super();
+    public key: string = 'A2';
+    public constructor(
+        injector: Injector
+    ) {
+        super(injector);
         console.log(`${this.key} ctor`);
     }
 
@@ -57,4 +59,5 @@ export class BComponent extends Logger {
     public test(): void {
 
     }
+
 }

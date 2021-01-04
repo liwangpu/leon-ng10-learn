@@ -1,4 +1,5 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Directive, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Directive, DoCheck, Injector, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { OpsatService } from '../services/opsat.service';
 
 export function getToggleValue(toggle: string): boolean {
     let str = localStorage.getItem(toggle);
@@ -22,7 +23,9 @@ export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContent
     public logAfterViewInit: boolean;
     public logAfterViewChecked: boolean;
     public logOnDestroy: boolean;
-    public constructor() {
+    public constructor(
+        protected injector: Injector
+    ) {
         this.logTitle = getToggleValue('logTitle');
         this.logOnChanges = getToggleValue('logOnChanges');
         this.logOnInit = getToggleValue('logOnInit');
@@ -37,6 +40,14 @@ export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContent
     public get title(): string {
         if (this.logTitle) { console.log(`${this.key} title`); }
         return this.key;
+    }
+
+    public get opsat(): OpsatService {
+        return this.injector.get(OpsatService);
+    }
+
+    public get cd(): ChangeDetectorRef {
+        return this.injector.get(ChangeDetectorRef);
     }
 
 

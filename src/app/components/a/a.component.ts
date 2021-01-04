@@ -1,23 +1,27 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Injector, SimpleChanges } from '@angular/core';
+import { dataMap, topicFilter } from 'src/app/services/opsat.service';
 import { Logger } from '../../models/logger';
 
 @Component({
-    selector: 'app-top',
-    templateUrl: './top.component.html',
-    styleUrls: ['./top.component.scss'],
+    selector: 'app-a',
+    templateUrl: './a.component.html',
+    styleUrls: ['./a.component.scss'],
     providers: [
         {
             provide: Logger,
-            useExisting: forwardRef(() => TopComponent)
+            useExisting: forwardRef(() => AComponent)
         }
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TopComponent extends Logger {
+export class AComponent extends Logger {
 
-    public key: string = 'Top';
-    public constructor() {
-        super();
+    public key: string = 'A';
+    public myName: string;
+    public constructor(
+        injector: Injector
+    ) {
+        super(injector);
         console.log(`${this.key} ctor`);
     }
 
@@ -27,6 +31,11 @@ export class TopComponent extends Logger {
 
     public ngOnInit(): void {
         super.ngOnInit();
+
+        this.opsat.message$.pipe(topicFilter('user'), dataMap).subscribe(({ name }) => {
+            console.log('a get user name:', name);
+            this.myName = name;
+        });
     }
 
 

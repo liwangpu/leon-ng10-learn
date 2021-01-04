@@ -1,23 +1,26 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Injector, SimpleChanges } from '@angular/core';
 import { Logger } from '../../models/logger';
 
 @Component({
-    selector: 'app-a',
-    templateUrl: './a.component.html',
-    styleUrls: ['./a.component.scss'],
+    selector: 'app-top',
+    templateUrl: './top.component.html',
+    styleUrls: ['./top.component.scss'],
     providers: [
         {
             provide: Logger,
-            useExisting: forwardRef(() => AComponent)
+            useExisting: forwardRef(() => TopComponent)
         }
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AComponent extends Logger {
+export class TopComponent extends Logger {
 
-    public key: string = 'A';
-    public constructor() {
-        super();
+    public key: string = 'Top';
+    public myName: string;
+    public constructor(
+        injector: Injector
+    ) {
+        super(injector);
         console.log(`${this.key} ctor`);
     }
 
@@ -55,6 +58,7 @@ export class AComponent extends Logger {
     }
 
     public test(): void {
-
+        this.myName = Date.now().toString();
+        this.opsat.publishMessage('user', { name: this.myName });
     }
 }

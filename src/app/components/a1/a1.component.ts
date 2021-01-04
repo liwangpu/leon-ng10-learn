@@ -1,23 +1,27 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Injector, SimpleChanges } from '@angular/core';
+import { dataMap, topicFilter } from 'src/app/services/opsat.service';
 import { Logger } from '../../models/logger';
 
 @Component({
-    selector: 'app-b1',
-    templateUrl: './b1.component.html',
-    styleUrls: ['./b1.component.scss'],
+    selector: 'app-a1',
+    templateUrl: './a1.component.html',
+    styleUrls: ['./a1.component.scss'],
     providers: [
         {
             provide: Logger,
-            useExisting: forwardRef(() => B1Component)
+            useExisting: forwardRef(() => A1Component)
         }
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class B1Component extends Logger {
+export class A1Component extends Logger {
 
-    public key: string = 'B1';
-    public constructor() {
-        super();
+    public key: string = 'A1';
+    public myName: string;
+    public constructor(
+        injector: Injector
+    ) {
+        super(injector);
         console.log(`${this.key} ctor`);
     }
 
@@ -27,6 +31,11 @@ export class B1Component extends Logger {
 
     public ngOnInit(): void {
         super.ngOnInit();
+
+        this.opsat.message$.pipe(topicFilter('user'), dataMap).subscribe(({ name }) => {
+            console.log('a1 get user name:', name);
+            this.myName = name;
+        });
     }
 
 
@@ -55,6 +64,10 @@ export class B1Component extends Logger {
     }
 
     public test(): void {
-
+        setTimeout(() => {
+            this.myName = Date.now().toString();
+            console.log('work....', this.myName);
+        }, 2000);
     }
+
 }

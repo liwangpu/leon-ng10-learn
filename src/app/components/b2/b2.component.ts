@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Injector, SimpleChanges } from '@angular/core';
 import { Logger } from '../../models/logger';
 
 @Component({
@@ -16,8 +16,10 @@ import { Logger } from '../../models/logger';
 export class B2Component extends Logger {
 
     public key: string = 'B2';
-    public constructor() {
-        super();
+    public constructor(
+        injector: Injector
+    ) {
+        super(injector);
         console.log(`${this.key} ctor`);
     }
 

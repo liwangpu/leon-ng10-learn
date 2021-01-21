@@ -59,6 +59,6 @@ export class TopComponent extends Logger {
 
     public test(): void {
         this.myName = Date.now().toString();
-        this.opsat.publishMessage('user', { name: this.myName });
+        // this.opsat.publishMessage('user', { name: this.myName });
     }
 }

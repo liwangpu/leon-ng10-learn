@@ -14,6 +14,7 @@ import { B1Component } from './components/b1/b1.component';
 import { B2Component } from './components/b2/b2.component';
 import { TopComponent } from './components/top/top.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         BrowserAnimationsModule,
         AppRoutingModule,
         FormsModule,
+        HttpClientModule,
         ReactiveFormsModule,
         MatCheckboxModule
     ],

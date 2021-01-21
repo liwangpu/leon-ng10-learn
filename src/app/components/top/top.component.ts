@@ -22,6 +22,10 @@ export class TopComponent extends Logger {
     ) {
         super(injector);
         console.log(`${this.key} ctor`);
+
+        // this.jsonServer.getPostById(1).subscribe(res => {
+        //     console.log('post:', res);
+        // });
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
@@ -30,6 +34,10 @@ export class TopComponent extends Logger {
 
     public ngOnInit(): void {
         super.ngOnInit();
+
+        // this.jsonServer.getPostById(1).subscribe(res => {
+        //     console.log('post:', res);
+        // });
     }
 
 

@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Directive, DoCheck, Injector, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { JsonServerService } from '../services/json-server.service';
 import { OpsatService } from '../services/opsat.service';
 
 export function getToggleValue(toggle: string): boolean {
@@ -48,6 +49,10 @@ export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContent
 
     public get cd(): ChangeDetectorRef {
         return this.injector.get(ChangeDetectorRef);
+    }
+
+    public get jsonServer(): JsonServerService {
+        return this.injector.get(JsonServerService);
     }
 
 

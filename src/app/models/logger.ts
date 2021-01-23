@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Directive, DoCheck, Injector, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Directive, DoCheck, Injector, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { JsonServerService } from '../services/json-server.service';
 import { OpsatService } from '../services/opsat.service';
 
@@ -49,6 +49,10 @@ export abstract class Logger implements OnChanges, OnInit, DoCheck, AfterContent
 
     public get cd(): ChangeDetectorRef {
         return this.injector.get(ChangeDetectorRef);
+    }
+
+    public get zone(): NgZone {
+        return this.injector.get(NgZone);
     }
 
     public get jsonServer(): JsonServerService {

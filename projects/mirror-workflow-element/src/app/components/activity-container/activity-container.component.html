@@ -1,35 +1,6 @@
 <div class="header">
-    <div class="close-button button" (click)='deleteNode($event)'>
-        <svg t="1617259979382" class="icon close-button" viewBox="0 0 1024 1024" version="1.1"
-            xmlns="http://www.w3.org/2000/svg" p-id="6685" xmlns:xlink="http://www.w3.org/1999/xlink" width="16"
-            height="16">
-            <defs>
-                <style type="text/css"></style>
-            </defs>
-            <path
-                d="M955.52 483.2a444.16 444.16 0 1 0-472.32 472.32 448 448 0 0 0 472.32-472.32z m-71.04 53.12a373.12 373.12 0 1 1-396.8-396.8 373.12 373.12 0 0 1 396.8 396.8z"
-                p-id="6686"></path>
-            <path
-                d="M675.84 387.2l-39.68-40.32a15.36 15.36 0 0 0-20.48 0L512 451.84 407.04 346.88a15.36 15.36 0 0 0-20.48 0l-40.32 40.32a15.36 15.36 0 0 0 0 20.48L451.2 512 346.24 616.32a15.36 15.36 0 0 0 0 20.48l40.32 40.32a15.36 15.36 0 0 0 20.48 0L512 572.16l104.32 104.96a15.36 15.36 0 0 0 20.48 0l39.68-40.32a14.08 14.08 0 0 0 0-20.48L571.52 512l104.32-104.32a14.08 14.08 0 0 0 0-20.48z"
-                p-id="6687"></path>
-        </svg>
-    </div>
     <p class="title">{{title}}</p>
-    <div class="collapse-button button collapse-button" [class.collapse]='collapse' (click)='toggleCollapse($event)'>
-        <svg t="1617260771301" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            p-id="6826" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14">
-            <defs>
-                <style type="text/css"></style>
-            </defs>
-            <path
-                d="M814.08 519.68a13.44 13.44 0 0 0-19.2 0L512 768 229.12 518.4a13.44 13.44 0 0 0-19.2 0l-35.2 37.12a16 16 0 0 0 0 22.4l298.88 262.4a55.04 55.04 0 0 0 74.24 0l298.88-261.76a16 16 0 0 0 0-22.4z"
-                p-id="6827"></path>
-            <path
-                d="M474.88 500.48a55.04 55.04 0 0 0 74.24 0l298.88-262.4a15.36 15.36 0 0 0 0-21.76l-35.2-37.76a13.44 13.44 0 0 0-19.2 0L512 424.96 229.12 176.64a13.44 13.44 0 0 0-19.2 0l-35.2 37.76a16 16 0 0 0 0 22.4z"
-                p-id="6828"></path>
-        </svg>
-    </div>
 </div>
-<div class="content" [class.hidden]='collapse'>
+<div class="content">
     <ng-content></ng-content>
 </div>

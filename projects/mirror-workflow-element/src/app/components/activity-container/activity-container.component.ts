@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, HostListener, Injector, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, Input, OnInit } from '@angular/core';
 import { LazyService } from '../../utils';
 import { ActivityNode } from '../../models';
 
@@ -10,7 +10,6 @@ import { ActivityNode } from '../../models';
 })
 export class ActivityContainerComponent implements OnInit {
 
-    public collapse: boolean;
     @Input()
     public title: string;
     @LazyService(ChangeDetectorRef)
@@ -24,18 +23,6 @@ export class ActivityContainerComponent implements OnInit {
 
     public ngOnInit(): void {
         this.title = this.node.title;
-    }
-
-    public toggleCollapse(evt: Event): void {
-        evt.stopPropagation();
-        this.collapse = !this.collapse;
-        this.node.collapse = this.collapse;
-        this.cd.markForCheck();
-    }
-
-    public deleteNode(evt: Event): void {
-        evt.stopPropagation();
-        this.node.onDelete.emit(this.node.key);
     }
 
 }

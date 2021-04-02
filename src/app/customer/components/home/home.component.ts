@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     public graphAnchor: ElementRef;
     @ViewChild('graphContainer', { static: true })
     public graphContainer: ElementRef;
-    private resize: any;
     private graphContainerResizeObs: ResizeObserver;
     public constructor(
         private ngZone: NgZone
@@ -24,10 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     }
 
-    ngOnDestroy(): void {
-        if (this.resize) {
-            window.removeEventListener('resize', this.resize);
-        }
+    public ngOnDestroy(): void {
+        if (this.graphContainerResizeObs) { this.graphContainerResizeObs.disconnect(); }
     }
 
     public ngOnInit(): void {
@@ -37,12 +34,30 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public ngAfterViewInit(): void {
         this.ngZone.runOutsideAngular(() => {
-            this.graphContainerResizeObs = new ResizeObserver(function (entries) {
+            this.graphContainerResizeObs = new ResizeObserver(entries => {
                 let rect = entries[0].contentRect;
                 this.graph.resize(rect.width, rect.height);
             });
 
             this.graphContainerResizeObs.observe(this.graphContainer.nativeElement);
+
+            // 快捷键配置
+            this.graph.bindKey('ctrl+c', () => {
+                const cells = this.graph.getSelectedCells();
+                // if (cells.length) {
+                //     this.graph.copy(cells)
+                // }
+                // return false
+                console.log('copy:', cells);
+            });
+
+            this.graph.bindKey('ctrl+z', () => {
+                this.graph.undo();
+            });
+
+            this.graph.bindKey('ctrl+shift+z', () => {
+                this.graph.redo();
+            });
         });
     }
 
@@ -58,8 +73,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public addNode(): void {
+        let id = `state_node_${Date.now().toString()}`;
         const rect = new Shape.Rect({
-            id: 'node122',
+            id,
             x: 140,
             y: 140,
             width: 100,
@@ -80,10 +96,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         // node1.setAttrByPath('title', {
         //     value: '测试一下'
         // });
-        node1.setData({ title: Date.now().toString(), content: '修改了', key: 'test-node-1' }, { deep: false, overwrite: false });
-
-        // node1.setData({ title: Date.now().toString() });
-        // console.log('node:', nodes);
+        // node1.setData({ title: Date.now().toString(), content: '修改了', key: 'test-node-1' }, { deep: false, overwrite: false });
     }
 
     public addCustomStateNode(): void {
@@ -100,42 +113,134 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             data: {
                 title: '决策节点'
             },
-            attrs: {
-
+            ports: {
+                groups: {
+                    left: {
+                        position: 'left',
+                        attrs: {
+                            circle: {
+                                r: 4,
+                                magnet: true,
+                                stroke: '#31d0c6',
+                                strokeWidth: 2,
+                                fill: '#fff'
+                            }
+                        }
+                    },
+                    right: {
+                        position: 'right',
+                        attrs: {
+                            circle: {
+                                r: 4,
+                                magnet: true,
+                                stroke: '#31d0c6',
+                                strokeWidth: 2,
+                                fill: '#fff'
+                            }
+                        }
+                    },
+                    top: {
+                        position: 'top',
+                        attrs: {
+                            circle: {
+                                r: 4,
+                                magnet: true,
+                                stroke: '#31d0c6',
+                                strokeWidth: 2,
+                                fill: '#fff'
+                            }
+                        }
+                    },
+                    bottom: {
+                        position: 'bottom',
+                        attrs: {
+                            circle: {
+                                r: 4,
+                                magnet: true,
+                                stroke: '#31d0c6',
+                                strokeWidth: 2,
+                                fill: '#fff'
+                            }
+                        }
+                    }
+                },
+                items: [
+                    {
+                        id: 'left_port',
+                        group: 'left',
+                    },
+                    {
+                        id: 'right_port',
+                        group: 'right',
+                    },
+                    {
+                        id: 'top_port',
+                        group: 'top',
+                    },
+                    {
+                        id: 'bottom_port',
+                        group: 'bottom',
+                    }
+                ]
             },
         });
-
-        // const rect = new Shape.Rect({
-        //     id: 'node122',
-        //     x: 140,
-        //     y: 140,
-        //     width: 100,
-        //     height: 140,
-        //     label: 'rect',
-        //     attrs: {
-        //         image: {
-        //             event: 'node:delete',
-        //             xlinkHref: 'trash.png',
-        //             width: 20,
-        //             height: 20,
-        //         }
-        //     }
-        // });
-
-        // this.graph.addNode(rect);
     }
 
     private renderGraph(): void {
         this.graph = new Graph({
             container: this.graphAnchor.nativeElement,
-            // background: {
-            //     color: '#fffbe6', // 设置画布背景颜色
-            // },
+            history: true,
+            selecting: {
+                enabled: true,
+                multiple: true,
+                rubberband: true,
+                movable: true,
+                showNodeSelectionBox: true,
+                className: 'my-selecting',
+            },
+            clipboard: {
+                enabled: true,
+            },
+            keyboard: {
+                enabled: true
+            },
             scroller: true,
             grid: {
                 size: 10,      // 网格大小 10px
                 visible: true, // 渲染网格背景
             },
+        });
+
+        this.graph.addNode({
+            id: 'startup_node',
+            x: 40,
+            y: 40,
+            width: 80,
+            height: 60,
+            shape: 'html',
+            html: 'startup-node',
+            ports: {
+                groups: {
+                    bottom: {
+                        position: 'bottom',
+                        attrs: {
+                            circle: {
+                                r: 4,
+                                magnet: true,
+                                stroke: '#31d0c6',
+                                strokeWidth: 2,
+                                fill: '#fff'
+                            }
+                        }
+                    }
+                },
+                items: [
+                    {
+                        id: 'bottom_port',
+                        group: 'bottom',
+                    }
+                ]
+            }
         });
 
         let cacheStr = localStorage.getItem('graph');
@@ -144,20 +249,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
             // this.graph.fromJSON(data);
         }
-
-        // this.graph.on('node:customevent', ({ view, e }) => {
-        //     console.log('node:customevent event:', view, e);
-        // });
-
-        // this.graph.on('*', ({ name, view, e }) => {
-        //     console.log('event:', name, view, e);
-
-        // });
-
-        window['flowNodeEventCallback'] = () => {
-            console.log('event:');
-
-        };
     }
 
     private resizeGraph(): void {

@@ -10,7 +10,14 @@
         padding: 12px;
 
         .activity {
-            height: 150px;
+            flex: 0 0 120px;
+            height: 80px;
+
+            &.startup {
+                $s: 60px;
+                flex: 0 0 80px;
+                height: $s;
+            }
         }
     }
 }

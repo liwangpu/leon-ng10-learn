@@ -4,14 +4,4 @@
     height: 100%;
     border: 1px solid #DDE0E6;
     border-radius: 3px;
-    
-    &.collapse {
-        // flex-basis: 36px;
-        height: 36px !important;
-        min-height: 0 !important;
-    }
-
-    &.active {
-        border-color: #5588ee;
-    }
 }

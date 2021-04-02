@@ -15,51 +15,12 @@
         height: 34px;
         padding: 0 5px;
 
-        div.close-button {
-            width: 20px;
-            height: 20px;
-            padding: 1px;
-
-            &:hover {
-                svg {
-                    fill: #FF5555;
-                }
-            }
-        }
-
         p.title {
             flex: 1;
             font-size: 14px;
             font-weight: 800;
             margin-left: 12px;
             color: #555C71;
-        }
-
-        div.collapse-button {
-            width: 20px;
-            height: 20px;
-            transition: transform 200ms;
-
-            &.collapse {
-                transform: rotate(-180deg);
-            }
-
-            &:hover {
-                svg {
-                    fill: #5588ee;
-                }
-            }
-        }
-
-        div.button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-
-            svg {
-                fill: #303339;
-            }
         }
     }
 

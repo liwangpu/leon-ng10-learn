@@ -1,0 +1,32 @@
+@import '../activity.scss';
+
+:host {
+    @include Activity;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #00B050;
+    position: relative;
+    border-radius: 15px;
+
+    div.container {
+        $s: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: $s;
+        height: $s;
+        overflow: hidden;
+
+        div.indicator {
+            width: $s * 2;
+            height: $s;
+            border-left: $s solid #fff;
+            border-top: $s / 2 solid transparent;
+            border-bottom: $s / 2 solid transparent;
+        }
+    }
+
+}

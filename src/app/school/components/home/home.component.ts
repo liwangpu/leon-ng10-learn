@@ -7,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+    public title: string = 'robot';
     public constructor() {
 
     }
 
     public ngOnInit(): void {
 
+    }
+
+    public changTitle(): void {
+        this.title = Date.now().toString();
     }
 
 }

@@ -1,2 +1,10 @@
-<h1>Customer Home Works!</h1>
-<hr>
+<div class="buttons">
+    <button (click)='clearStorage()'>清空缓存</button>
+    <button (click)='storage()'>缓存</button>
+    <button (click)='addNode()'>添加一个节点</button>
+    <button (click)='addCustomStateNode()'>添加State节点</button>
+    <button (click)='changeNode()'>修改节点</button>
+</div>
+<div class="content" #graphContainer>
+    <div class="graph-container" #graphAnchor></div>
+</div>

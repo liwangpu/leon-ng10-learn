@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SchoolRoutingModule } from './school-routing.module';
 import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    SchoolRoutingModule
-  ]
+    declarations: [HomeComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [
+        CommonModule,
+        SchoolRoutingModule
+    ]
 })
 export class SchoolModule { }

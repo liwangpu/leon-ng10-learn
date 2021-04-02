@@ -1,0 +1,16 @@
+:host {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+
+    div.content {
+        flex: 1;
+        display: flex;
+        padding: 12px;
+
+        .activity {
+            height: 150px;
+        }
+    }
+}

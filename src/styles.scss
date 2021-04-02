@@ -13,3 +13,14 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+
+.mat-body p,
+.mat-body-1 p,
+.mat-typography p {
+    margin: 0;
+}
+
+mirror-state-activity {
+    border: 1px solid #DDE0E6;
+    padding: 8px 12px;
+}

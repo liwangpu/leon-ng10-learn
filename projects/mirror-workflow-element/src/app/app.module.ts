@@ -17,7 +17,7 @@ import { StartupActivityComponent } from './components/startup-activity/startup-
         BrowserModule
     ],
     providers: [],
-    // bootstrap: [AppComponent],// 如果是编译elements记得需要注释bootstrap
+    bootstrap: [AppComponent],// 如果是编译elements记得需要注释bootstrap
     exports: [StateActivityComponent, StartupActivityComponent]
 })
 export class AppModule {

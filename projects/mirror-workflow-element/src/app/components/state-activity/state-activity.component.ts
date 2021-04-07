@@ -17,6 +17,8 @@ export class StateActivityComponent extends ActivityNode implements OnInit {
 
     @Input()
     public content: string;
+    @Input()
+    public last: boolean;
     public constructor(
         injector: Injector
     ) {

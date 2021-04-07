@@ -19,5 +19,10 @@
     div.content {
         width: 100%;
         display: flex;
+
+        .activity{
+            flex: 0 0 200px;
+            height: 120px;
+        }
     }
 }

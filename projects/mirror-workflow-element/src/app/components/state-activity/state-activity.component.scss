@@ -8,10 +8,27 @@
         flex-flow: column;
         justify-content: center;
         align-items: center;
+        padding: 0 12px;
         width: 100%;
         height: 100%;
         font-size: 16px;
         font-weight: 500;
         color: #555C71;
+
+        p {
+            line-height: 16px;
+            width: 170px;
+            height: 16px;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            white-space:nowrap;
+            overflow: hidden;
+            text-align: center;
+
+            &.flag {
+                margin-top: 10px;
+            }
+        }
     }
 }

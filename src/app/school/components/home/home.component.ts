@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'school-home',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-    public title: string = 'robot';
+    public content: string = 'robot';
+    @ViewChild('stateNode')
+    public stateNode: ElementRef;
     public constructor() {
 
     }
@@ -17,7 +19,8 @@ export class HomeComponent implements OnInit {
     }
 
     public changTitle(): void {
-        this.title = Date.now().toString();
+        this.content = Date.now().toString();
+        this.stateNode.nativeElement.content=this.content;
     }
 
 }

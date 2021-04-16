@@ -13,33 +13,37 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        // hotkeys.unbind('del', 'mytest');
-        this.stopHotkeys();
+        hotkeys.deleteScope('partOne');
+        hotkeys.deleteScope('partTwo');
     }
 
     public ngOnInit(): void {
-        // this.startHotkeys();
-    }
-
-    public stopHotkeys(): void {
-        hotkeys.deleteScope('customer');
-    }
-
-    public getScope(): void {
-        let sss = hotkeys.getScope();
-        console.log('getScope:', sss);
-    }
-
-    public startHotkeys(): void {
-        hotkeys('del', 'customer', (event, handler) => {
-            // event.preventDefault()
-            alert('customer pressed F5 1')
+        hotkeys('del', 'partOne', (event, handler) => {
+            event.preventDefault();
+            alert('区域一 按下 del')
         });
 
-        hotkeys.setScope('customer');
+        hotkeys('del', 'partTwo', (event, handler) => {
+            event.preventDefault();
+            alert('区域二 按下 del')
+        });
     }
 
-    public startAllHotkeys(): void {
-        hotkeys.setScope('app1');
+    // public stopHotkeys(): void {
+    //     hotkeys.deleteScope('customer');
+    // }
+
+    public getScope(): void {
+        let s = hotkeys.getScope();
+        console.log('区域:', s);
     }
+
+    public startPartOneHotkeys(): void {
+        hotkeys.setScope('partOne');
+    }
+
+    public startPartTwoHotkeys(): void {
+        hotkeys.setScope('partTwo');
+    }
+
 }

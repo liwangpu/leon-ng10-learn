@@ -10,15 +10,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         // hotkeys.unbind('del', 'mytest');
-        hotkeys.deleteScope('app1');
+        // hotkeys.deleteScope('app1');
     }
 
     public ngOnInit(): void {
-        hotkeys('del', 'app1', (event, handler) => {
-            event.preventDefault()
-            alert('app pressed F5!')
-        });
+        // hotkeys('del', 'app1', (event, handler) => {
+        //     event.preventDefault()
+        //     alert('app pressed F5!')
+        // });
 
-        hotkeys.setScope('app1');
+        // hotkeys.setScope('app1');
     }
 }

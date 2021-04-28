@@ -41,23 +41,23 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
             this.graphContainerResizeObs.observe(this.graphContainer.nativeElement);
 
-            // 快捷键配置
-            this.graph.bindKey('ctrl+c', () => {
-                const cells = this.graph.getSelectedCells();
-                // if (cells.length) {
-                //     this.graph.copy(cells)
-                // }
-                // return false
-                console.log('copy:', cells);
-            });
+            // // 快捷键配置
+            // this.graph.bindKey('ctrl+c', () => {
+            //     const cells = this.graph.getSelectedCells();
+            //     // if (cells.length) {
+            //     //     this.graph.copy(cells)
+            //     // }
+            //     // return false
+            //     console.log('copy:', cells);
+            // });
 
-            this.graph.bindKey('ctrl+z', () => {
-                this.graph.undo();
-            });
+            // this.graph.bindKey('ctrl+z', () => {
+            //     this.graph.undo();
+            // });
 
-            this.graph.bindKey('ctrl+shift+z', () => {
-                this.graph.redo();
-            });
+            // this.graph.bindKey('ctrl+shift+z', () => {
+            //     this.graph.redo();
+            // });
         });
     }
 
@@ -182,7 +182,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
                         group: 'bottom',
                     }
                 ]
-            },
+            }
         });
     }
 

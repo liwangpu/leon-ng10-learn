@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Graph, Shape } from '@antv/x6';
+import { Cell, Graph, Shape, Node } from '@antv/x6';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import ResizeObserver from 'resize-observer-polyfill';
+import { SpecStateNodeComponent } from '../spec-state-node/spec-state-node.component';
 
 @Component({
     selector: 'customer-home',
@@ -41,7 +42,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
             this.graphContainerResizeObs.observe(this.graphContainer.nativeElement);
 
-            // // 快捷键配置
+            // this.graph.on('node:testEvent', () => {
+            //     console.log('graph listen event');
+            // });
+
+            // 快捷键配置
+            this.graph.bindKey('del', async evt => {
+                evt.stopPropagation();
+                const selectedCells: Array<Cell> = this.graph.getSelectedCells();
+                this.graph.removeCells(selectedCells);
+            });
             // this.graph.bindKey('ctrl+c', () => {
             //     const cells = this.graph.getSelectedCells();
             //     // if (cells.length) {
@@ -83,16 +93,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             label: 'rect'
         });
 
-
-
         this.graph.addNode(rect);
-
-        // rect.trigger('node:delete', {});
     }
 
     public changeNode(): void {
-        let nodes = this.graph.getNodes();
+        let nodes: Array<Node> = this.graph.getNodes();
         let node1 = nodes.find(n => n.id === 'customNode1');
+        let dd: any = node1.getData() || {};
+        // node1.setData(dd);
+        node1.setData({ ...dd });
+
+        // node1.size(300, 300);
+
+
         // node1.setAttrByPath('title', {
         //     value: '测试一下'
         // });
@@ -186,62 +199,82 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         });
     }
 
+    public addCustomStateNode1(): void {
+        let id = `state_node_${Date.now().toString()}`;
+        this.graph.addNode({
+            id,
+            x: 40,
+            y: 40,
+            width: 200,
+            height: 120,
+            shape: 'html',
+            html: 'spec-state-node'
+        });
+    }
+
     private renderGraph(): void {
         this.graph = new Graph({
             container: this.graphAnchor.nativeElement,
-            history: true,
-            selecting: {
-                enabled: true,
-                multiple: true,
-                rubberband: true,
-                movable: true,
-                showNodeSelectionBox: true,
-                className: 'my-selecting',
-            },
-            clipboard: {
-                enabled: true,
-            },
-            keyboard: {
-                enabled: true
-            },
-            scroller: true,
+            // history: true,
+            // selecting: {
+            //     enabled: true,
+            //     multiple: true,
+            //     rubberband: true,
+            //     movable: true,
+            //     showNodeSelectionBox: true,
+            //     className: 'my-selecting',
+            // },
+            keyboard: true,
             grid: {
                 size: 10,      // 网格大小 10px
                 visible: true, // 渲染网格背景
             },
-        });
-
-        this.graph.addNode({
-            id: 'startup_node',
-            x: 40,
-            y: 40,
-            width: 80,
-            height: 60,
-            shape: 'html',
-            html: 'startup-node',
-            ports: {
-                groups: {
-                    bottom: {
-                        position: 'bottom',
-                        attrs: {
-                            circle: {
-                                r: 4,
-                                magnet: true,
-                                stroke: '#31d0c6',
-                                strokeWidth: 2,
-                                fill: '#fff'
-                            }
-                        }
-                    }
-                },
-                items: [
-                    {
-                        id: 'bottom_port',
-                        group: 'bottom',
-                    }
-                ]
+            // resizing: true,
+            scroller: {
+                enabled: true,
+                pageVisible: true,
+                pageBreak: true,
+                pannable: true,
+            },
+            mousewheel: {
+                enabled: true,
+                modifiers: ['ctrl', 'meta'],
+                minScale: 0.5,
+                maxScale: 2,
             }
         });
+
+        // this.graph.addNode({
+        //     id: 'startup_node',
+        //     x: 40,
+        //     y: 40,
+        //     width: 80,
+        //     height: 60,
+        //     shape: 'html',
+        //     html: 'startup-node',
+        //     ports: {
+        //         groups: {
+        //             bottom: {
+        //                 position: 'bottom',
+        //                 attrs: {
+        //                     circle: {
+        //                         r: 4,
+        //                         magnet: true,
+        //                         stroke: '#31d0c6',
+        //                         strokeWidth: 2,
+        //                         fill: '#fff'
+        //                     }
+        //                 }
+        //             }
+        //         },
+        //         items: [
+        //             {
+        //                 id: 'bottom_port',
+        //                 group: 'bottom',
+        //             }
+        //         ]
+        //     }
+        // });
 
         let cacheStr = localStorage.getItem('graph');
         if (cacheStr) {

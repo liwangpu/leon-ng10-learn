@@ -4,10 +4,11 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { HomeComponent } from './components/home/home.component';
 import { StateNodeComponent } from './components/state-node/state-node.component';
 import { createCustomElement } from '@angular/elements';
-// import { registry } from './graph-node-registry';
+import { registry } from './graph-node-registry';
+import { SpecStateNodeComponent } from './components/spec-state-node/spec-state-node.component';
 
 @NgModule({
-    declarations: [HomeComponent, StateNodeComponent],
+    declarations: [HomeComponent, StateNodeComponent, SpecStateNodeComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [
         CommonModule,
@@ -19,9 +20,11 @@ import { createCustomElement } from '@angular/elements';
 export class CustomerModule {
 
     public constructor(injector: Injector) {
+        // console.log('mm',this);
+
         if (!this.isRegistered()) {
             customElements.define('app-state-node', createCustomElement(StateNodeComponent, { injector }));
-            // registry();
+            registry();
         }
     }
 

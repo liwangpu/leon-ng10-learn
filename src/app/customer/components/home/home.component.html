@@ -3,8 +3,11 @@
     <button (click)='storage()'>缓存</button>
     <!-- <button (click)='addNode()'>添加一个节点</button> -->
     <button (click)='addCustomStateNode()'>添加自定义State节点</button>
+    <!-- <button (click)='addCustomStateNode1()'>添加自定义State节点 1</button> -->
     <button (click)='changeNode()'>修改节点</button>
 </div>
 <div class="content" #graphContainer>
-    <div class="graph-container" #graphAnchor></div>
+    <div class="wrapper">
+        <div class="graph-container" #graphAnchor></div>
+    </div>
 </div>
